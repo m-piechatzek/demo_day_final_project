@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  username: MyString
+  license_pl: MyString
+  prov: MyString
+  check_in: false
+  alert: false
+  points: 1
+  location: MyString
+  long: 1.5
+  lat: 1.5
+  f_name: MyString
+  l_name: MyString
+  email: MyString
+  password_digest: MyString
+
+two:
+  username: MyString
+  license_pl: MyString
+  prov: MyString
+  check_in: false
+  alert: false
+  points: 1
+  location: MyString
+  long: 1.5
+  lat: 1.5
+  f_name: MyString
+  l_name: MyString
+  email: MyString
+  password_digest: MyString
