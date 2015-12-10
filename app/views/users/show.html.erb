@@ -1,0 +1,115 @@
+<style type="text/css">
+  html, body { height: 100%; margin: 0; padding: 0; }
+  #map { height: 50%; }
+</style>
+
+<div id="map"></div>
+<button type="button" name="button" id="btn_location">Send in your Location</button>
+<input type="hidden" id="current_user" value="<%= current_user.id %>" />
+<script type="text/javascript">
+
+
+// Create a variable in JSON format
+//     var user = {
+//         f_name: 'Jeff',
+//         l_name: 'Smith',
+//         password: 'password'
+//     }
+//     console.log("user's name = " + user.f_name + " " + user.l_name);
+// console.log(user);
+//
+//     // Post data via ajax to a rails controller
+//     $.ajax({
+//       type: "POST",
+//       url: '/users',
+//       data: {user},
+//       success: function() {
+//         alert('worked')
+//       },
+//       dataType: 'json'
+//     });
+
+
+function initMap() {
+
+//finds the location of current user ***********************
+if(navigator.geolocation) {
+
+    var map;
+    var mapOptions = {
+        zoom: 15,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+
+    map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+    navigator.geolocation.getCurrentPosition(function(position) {
+      //************************
+
+      //geolocate is the location of the user
+    var geolocate = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
+    //_pCord hardcoded position of another 'user'
+    var _pCord = new google.maps.LatLng(49.2820030, -123.1072000);
+    //finds the distance between current_user and _pCord
+    var distance = google.maps.geometry.spherical.computeDistanceBetween(_pCord, geolocate);
+    //if distance is within 700m then the marker will show *****************
+      if (distance<= 700){
+          console.log(google.maps.geometry.spherical.computeDistanceBetween(_pCord, geolocate));
+
+            var marker2 = new google.maps.Marker({
+              map: map,
+              position: new google.maps.LatLng(49.2820030,
+                 -123.1072000),
+                 icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+              title: 'Driver'
+            });
+          }
+      //*********************
+          //marker of current_user
+            // var marker = new google.maps.Marker({
+            //   map: map,
+            //   position: new google.maps.LatLng(position.coords.latitude,
+            //      position.coords.longitude),
+            //   title: 'Ticketter radius'
+            // });
+
+            // Add circle/radius
+            var circle = new google.maps.Circle({
+              map: map,
+              radius: 350,    // 10 miles in metres
+              fillColor: '#AA0000'
+            });
+            circle.bindTo('center', marker2, 'position');
+
+            //the map centers around the current_user's position
+        map.setCenter(_pCord);
+
+      //hardcode test for location
+        var blah = 12.0;
+console.log(geolocate);
+          //when button is clicked, user location should be saved
+        $('#btn_location').click(function(){
+        user_id = $('#current_user').val();
+          $.ajax({
+            type: "PUT",
+            url: '/users/' + user_id,
+            data: {user: {"lat": position.coords.latitude, "long": position.coords.longitude}},
+            success: function() {
+              alert('worked')
+            },
+            dataType: 'json'
+          });
+        });
+    });
+
+} else {
+    document.getElementById('map').innerHTML = 'No Geolocation Support.';
+}
+
+};
+
+</script>
+<script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQscgJMUX5SPRMKa6eA1hFdoPSBnc33ig&libraries=geometry&callback=initMap">
+</script>

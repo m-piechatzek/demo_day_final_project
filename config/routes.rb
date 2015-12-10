@@ -2,11 +2,14 @@ Rails.application.routes.draw do
 
   root "users#index"
 
-  resources :users, only: [:new, :create, :index]
+  resources :users, only: [:new, :create, :index, :update, :show]
 
   resources :sessions, only: [:new, :create] do
     delete :destroy, on: :collection
   end
+  # post '/users/:data' => 'users#update'
+
+  # post "/map" "users#map"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
