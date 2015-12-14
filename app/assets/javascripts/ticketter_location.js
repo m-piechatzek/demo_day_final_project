@@ -35,34 +35,47 @@ function initTicketterMap() {
             data:  {ticketterlocation: {"tick_lat": position.coords.latitude, "tick_lng": position.coords.longitude, "user_id": user_id}},
             dataType: 'json'
           }).done(function(response) {
-            distance(response.users_lat, response.users_lng, response.tick_lat, response.tick_lng);
+            distance(response.users_lat, response.users_lng, response.tick_lat, response.tick_lng, response.all_checkins);
+            console.log(response.all_checkins)
             console.log(response.users_lat)
+
           });
         });
       });
 
 
-
-    var distance = function(users_lat, users_lng,lat, lng) {
-
+// ***************************************
+// have to change over users
+// i think i did it
+    var distance = function(users_lat, users_lng,lat, lng, users) {
+      var user_id_js = users["all_checkin_user"]
+      var user_lat_js = users["check_lat"]
+      var user_lng_js = users["check_lng"]
+console.log(users_lat)
           navigator.geolocation.getCurrentPosition(function(position) {
     //searches one ticketter location against many user check-ins
           var ticketter_loca = new google.maps.LatLng(lat, lng);
 
-            $.each(users_lat, function(i, item)  {
-              var users_latitude = users_lat[i].lat
-              var users_longitude = users_lng[i].long
-console.log(users_longitude)
-console.log(users_latitude)
+            $.each(user_lat_js, function(i, item)  {
+              var users_latitude = user_lat_js[i].check_lat
+              var users_longitude = user_lng_js[i].check_lng
+
+// alert(checkin_users)
 
               var checkin_users = new google.maps.LatLng(users_latitude, users_longitude);
-
               //calculates the distance between ticketters and recent checkin
               var distance = google.maps.geometry.spherical.computeDistanceBetween(ticketter_loca, checkin_users);
-
+alert(distance)
 
             if (distance<= 350){
               alert("you have alerted someone ")
+              current_user_js = $('#current_user').val();
+              console.log(current_user_js)
+              if(user_id_js[i].user_id == current_user_js)
+              {
+                console.log("allllert")
+                alert("there is a ticketter in your area!")
+              }
       //instead of markings there will be push notifications letting users who have checked in know there is a ticketter in the area
                   // var marker = new google.maps.Marker({
                   //   map: map,

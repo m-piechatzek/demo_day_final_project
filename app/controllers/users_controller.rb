@@ -3,6 +3,7 @@ class UsersController < ApplicationController
     if current_user.present?
     @latitude = current_user.lat
     @longitude = current_user.long
+    @checkin_location = CheckinLocation.new
   end
     @ticketter_locations = TicketterLocation.all
   end

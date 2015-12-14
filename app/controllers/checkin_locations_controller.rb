@@ -1,10 +1,12 @@
 class CheckinLocationsController < ApplicationController
-# changgggggggggggeeeeeeeeee
+
+
   def create
     @checkin_location = CheckinLocation.new checkin_params
 
-    @ticketters_lat = TicketterLocation.select("tick_lat");
-    @ticketters_lng = TicketterLocation.select("tick_lng");
+    @ticketters_lat = TicketterLocation.select("tick_lat")
+    @ticketters_lng = TicketterLocation.select("tick_lng")
+
 
       respond_to do |format|
        if @checkin_location.save #sends all the ticketter locations and current checkin
@@ -32,7 +34,7 @@ class CheckinLocationsController < ApplicationController
   private
 
   def checkin_params
-    params.require(:checkinlocation).permit(:check_lat, :check_lng, :user_id)
+    params.require(:checkinlocation).permit(:check_lat, :check_lng, :user_id, :timer)
   end
 
 
