@@ -1,0 +1,2 @@
+module TicketterLocationsHelper
+end

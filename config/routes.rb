@@ -7,6 +7,10 @@ Rails.application.routes.draw do
   resources :sessions, only: [:new, :create] do
     delete :destroy, on: :collection
   end
+
+  resources :ticketter_locations
+
+  resource :checkin_locations
   # post '/users/:data' => 'users#update'
 
   # post "/map" "users#map"

@@ -1,0 +1,2 @@
+module CheckinLocationsHelper
+end

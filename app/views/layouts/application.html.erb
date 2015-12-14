@@ -5,6 +5,11 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQscgJMUX5SPRMKa6eA1hFdoPSBnc33ig&libraries=geometry&callback=initMap">
+  </script>
+
 </head>
 <body>
   <% if user_signed_in? %>
@@ -12,12 +17,11 @@
     <%= link_to "Logout", sessions_path, method: :delete,
              data: {confirm: "are you sure you want to log out?"}%>
   <% else %>
-    <%= link_to "Login", new_session_path %> |
-    <%= link_to "Sign Up", new_user_path %>
+    <%#= link_to "Login", new_session_path %> |
+    <%#= link_to "Sign Up", new_user_path %>
   <% end %>
   <hr>
 
 <%= yield %>
-
 </body>
 </html>
