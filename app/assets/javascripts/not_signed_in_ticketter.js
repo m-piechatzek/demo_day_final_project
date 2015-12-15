@@ -11,11 +11,11 @@ function initNotSignedTicketterMap() {
     map = new google.maps.Map(document.getElementById('map'), mapOptions);
         //when button is clicked, ticketter location is saved and sent to all checkins that apply
       $("#btn_ticketter_no_signup").click(function(){
-
+console.log("hi")
         // start a spinner
         navigator.geolocation.getCurrentPosition(function(position) {
           $.ajax({
-            url: '/ticketter_locations/',
+            url: '/ticketter_locations',
             method: "POST",
             data:  {ticketterlocation: {"tick_lat": position.coords.latitude, "tick_lng": position.coords.longitude}},
             dataType: 'json'

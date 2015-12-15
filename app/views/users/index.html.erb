@@ -32,13 +32,14 @@
 <button type="button" name="button" id="btn_location">Check-In</button>
 <button type="button" name="button" id="btn_ticketter">Ticketter Location</button>
 <button type="button" name="button" id="btn_location_signout">Check-Out</button>
-
+<% if current_user.present? %>
 <%= form_for @checkin_location do |f| %>
 <div>
   <%= f.label :timer %>
   <%= f.time_select :timer %>
 </div>
 <%= f.submit "Check-In with Timer", id: "btn_location_with_timer"%>
+<% end %>
 <% end %>
 <!-- <button type="button" name="button" id="btn_location_with_timer">Check-In with Timer</button> -->
 
