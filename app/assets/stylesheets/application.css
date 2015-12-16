@@ -16,6 +16,7 @@
 
 body {
 font-family: 'Quicksand', sans-serif;
+padding-bottom: 70px;
 }
 
 .btn, .form-control{
@@ -33,11 +34,18 @@ button:hover, input:hover {
   background-color: rgba(255,255,255,.5);
 }
 
-a{
-  color: #FFF;
+a {
+  color: #FFF !important;
+  padding: 5px !important;
+  float:left;
+  margin: 0px !important;
+
 
 }
 a:hover {
 color: #000;
     text-decoration: none;
+}
+.navbar-default {
+  background-color: rgba(28,45,97,.5);
 }

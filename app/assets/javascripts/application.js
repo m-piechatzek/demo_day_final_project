@@ -18,6 +18,8 @@
 function initMap() {
   initTicketterMap();
   initCheckInMap();
+  initCheckInWithTimerMap();
   initNotSignedTicketterMap();
   initCheckOutMap();
+  initRecentTickMap();
 }

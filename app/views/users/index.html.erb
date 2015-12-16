@@ -46,8 +46,8 @@
     float: left;
   }
   #btn_location, #btn_location_signout, #btn_location_with_timer {
-    padding: 10px;
-    margin: 5px;
+    padding: 2px;
+    margin: 3px;
   }
   #btn_location_with_timer {
     margin-bottom: 1px;
@@ -84,6 +84,27 @@
     font-size: .5em;
     color: white;
   }
+  .top_word {
+    margin: 0px;
+  }
+  #you, #vanppl {
+    margin: 0px;
+    font-size: 1.8em;
+  }
+  #hour, #min {
+    width: 35px;
+    margin-bottom: 3px;
+  }
+  #btn_location_signout {
+    float: right;
+    position: absolute;
+    top: 125px;
+    padding: 0px;
+  }
+  #time {
+    color: white;
+  }
+
 </style>
 <body class="body">
 <!-- Login if user is not signed in -->
@@ -123,31 +144,33 @@
 <!-- If current user signed in -->
 <% if current_user.present? %>
   <div class="col-xs-6 checkins ">
-      <img src="map_van.png" alt="" class="map_van1" />
-    <i class="fa fa-map-marker fa-3x"></i>
+    <!-- Title -->
+    <h4 class="top_word">For</h4>
+      <h3 id="you">You</h3>
+      <!-- Map Image -->
+        <img src="map_van.png" alt="" class="map_van1" />
+          <i class="fa fa-map-marker fa-3x"></i>
+          <!--  -->
     <button type="button" name="button" id="btn_location">Check-In</button>
+      <button type="button" name="button" id="btn_location_signout">Check-Out</button>
     <p class="checkin_explain">
       Click to save location of your parked vehicle so that other
       users can notify you of ticketters
     </p>
-      <button type="button" name="button" id="btn_location_signout">Check-Out</button>
 <!-- current user checkin with timer -->
-    <%= form_for @checkin_location do |f| %>
-      <div>
-        <%= f.time_select :timer %>
-      </div>
-      <%= f.submit "Check-In + Timer", id: "btn_location_with_timer"%>
-    <% end %>
+  <span id="time">Timer:</span> <input id="hour" name="hour" ><span id="time"> : </span><input id="min" name="min"><br>
+  <input type="button" id= "check_timer" value="Check-In + Timer">
+
     <h4>Forgot to Check-in?</h4>
     <button type="button" name="button" id="btn_forgot_checkin">Check-In</button>
-      <h4>Map of Recent Ticketters</h4>
-        <button type="button" name="button" id="btn_recent_ticketters">Map</button>
 
   <!-- Finds current user_id -->
     <input type="hidden" id="current_user" value="<%= current_user.id %>" />
 
   </div>
   <div class="col-xs-6 pull-right">
+    <h4 class="top_word">Other</h4>
+    <h3 id="vanppl">Vancouverites</h3>
         <img src="map_van.png" alt="" class="map_van" />
         <i class="fa fa-bullseye fa-3x"></i>
         <button type="button" name="button" id="btn_ticketter">Ticketter Location</button>
@@ -158,8 +181,31 @@
         <button type="button" name="button" id="btn_notify_towed">Towed</button>
         <button type="button" name="button" id="btn_notify_ticket">Ticketted</button>
         <button type="button" name="button" id="btn_notify_custom">Custom</button>
+      <h4>Map of Recent Ticketters</h4>
+        <button type="button" name="button" id="btn_recent_ticketters">Map</button>
   </div>
+
+
+
+  <!-- Modal -->
+    <!-- <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog"> -->
+
+        <!-- Modal content-->
+        <!-- <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Modal Methods</h4>
+          </div>
+          <div class="modal-body">
+            <p>The <strong>show</strong> method shows the modal and the <strong>hide</strong> method hides the modal.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div> -->
 <% end %>
+
 
 
 
@@ -180,5 +226,5 @@
 
     <% end %> -->
   <!-- FONT AWESOME FOR SPINNER -->
-    <!-- <div id="map"></div> -->
+    <div id="map"></div>
 </body>

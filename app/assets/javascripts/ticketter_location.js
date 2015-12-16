@@ -51,7 +51,6 @@ function initTicketterMap() {
       var user_id_js = users["all_checkin_user"]
       var user_lat_js = users["check_lat"]
       var user_lng_js = users["check_lng"]
-console.log(users_lat)
           navigator.geolocation.getCurrentPosition(function(position) {
     //searches one ticketter location against many user check-ins
           var ticketter_loca = new google.maps.LatLng(lat, lng);
@@ -65,15 +64,16 @@ console.log(users_lat)
               var checkin_users = new google.maps.LatLng(users_latitude, users_longitude);
               //calculates the distance between ticketters and recent checkin
               var distance = google.maps.geometry.spherical.computeDistanceBetween(ticketter_loca, checkin_users);
-alert(distance)
+
 
             if (distance<= 350){
               alert("you have alerted someone ")
+              console.log("you have alerted someone ")
               current_user_js = $('#current_user').val();
-              console.log(current_user_js)
+
               if(user_id_js[i].user_id == current_user_js)
               {
-                console.log("allllert")
+
                 alert("there is a ticketter in your area!")
               }
       //instead of markings there will be push notifications letting users who have checked in know there is a ticketter in the area

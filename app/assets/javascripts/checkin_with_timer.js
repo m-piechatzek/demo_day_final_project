@@ -1,4 +1,18 @@
-function initCheckInMap() {
+// function checkin_with_timer() {
+// var hour = $("#hour").val();
+// var min = $("#min").val();
+// var timer = new Date(0000, 00, 00, hour, min, 0);
+//
+//   user_id = $('#current_user').val();
+//   $('#form_check_timer').ajax({
+//     url: '/checkin_locations/',
+//     method: 'POST',
+//     data:  {checkinlocation: {"check_lat": position.coords.latitude, "check_lng": position.coords.longitude, "user_id": user_id, "timer": timer }},
+//     dataType: 'json'
+//   })
+// });
+// }
+function initCheckInWithTimerMap() {
 
   //finds the location of current user ***********************
   if(navigator.geolocation) {
@@ -12,38 +26,32 @@ function initCheckInMap() {
       map = new google.maps.Map(document.getElementById('map'), mapOptions);
             //when button is clicked, check-in location should be saved and ran against ticketter locations
 
-      $('#btn_location').click(function(){
+      $('#check_timer').click(function() {
+        var hour = $("#hour").val();
+        var min = $("#min").val();
 
+        var timer = ((parseInt(hour)*60)+(parseInt(min)*60))*1000;
         // start a spinner
+        console.log(timer)
         navigator.geolocation.getCurrentPosition(function(position) {
           // stop the spinner
           user_id = $('#current_user').val();
           $.ajax({
-            url: '/users/' + user_id + ".json",
-            method: "PUT",
-            data: {user: {"lat": position.coords.latitude, "long": position.coords.longitude, "check_in": true}},
-            dataType: 'json'
-          }).done(function() {
-            // distance(response.lat, response.long, response.tick_lat, response.tick_lng);
-          });
-          $.ajax({
             url: '/checkin_locations/',
-            method: "POST",
-            data:  {checkinlocation: {"check_lat": position.coords.latitude, "check_lng": position.coords.longitude, "user_id": user_id}},
+            method: 'POST',
+            data:  {checkinlocation: {"check_lat": position.coords.latitude, "check_lng": position.coords.longitude, "user_id": user_id, "time": timer }},
             dataType: 'json'
           }).done(function(response) {
-
-              alert("You have checked in!");
-swal("Good job!", "You clicked the button!", "success");
             if (response.status == "SUCCESS"){
-            distance(response.user_lat, response.user_lng, response.tick_lat, response.tick_lng);
+              setTimeout(function() {distance(response.user_lat,
+                response.user_lng, response.tick_lat,
+                response.tick_lng)}, response.time);
           } else {
             alert("Cannot check in more than once!");
           }
         });
         });
-       });
-
+      });
 
   var distance = function(lat,lng,tick_lat,tick_lng){
     navigator.geolocation.getCurrentPosition(function(position) {
@@ -68,6 +76,7 @@ swal("Good job!", "You clicked the button!", "success");
 
               //messages back if there has been any ticketters
                 alert("you have a ticketter in your area");
+                console.log("alert")
                 //mark of the current checkin, don't really need this
               var marker2 = new google.maps.Marker({
                 map: map,
@@ -91,15 +100,3 @@ swal("Good job!", "You clicked the button!", "success");
       document.getElementById('map').innerHTML = 'No Geolocation Support.';
   }
 };
-
-            // var marker = new google.maps.Marker({
-            //   map: map,
-            //   position: new google.maps.LatLng(49.2820030, -123.1072000),
-            //   title: 'Ticketter location'
-            // });
-      //*********************
-          //marker of current_user
-
-            // Add circle/radius
-
-            //the map centers around the current_user's position
