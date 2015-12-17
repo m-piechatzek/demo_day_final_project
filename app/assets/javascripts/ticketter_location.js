@@ -36,8 +36,7 @@ function initTicketterMap() {
             dataType: 'json'
           }).done(function(response) {
             distance(response.users_lat, response.users_lng, response.tick_lat, response.tick_lng, response.all_checkins);
-            console.log(response.all_checkins)
-            console.log(response.users_lat)
+
 
           });
         });
@@ -67,14 +66,13 @@ function initTicketterMap() {
 
 
             if (distance<= 350){
-              alert("you have alerted someone ")
-              console.log("you have alerted someone ")
+              // swal("You have alerted someone!", "", "success");
               current_user_js = $('#current_user').val();
 
               if(user_id_js[i].user_id == current_user_js)
               {
 
-                alert("there is a ticketter in your area!")
+                swal("There is a ticketter in your area!", "", "warning");
               }
       //instead of markings there will be push notifications letting users who have checked in know there is a ticketter in the area
                   // var marker = new google.maps.Marker({

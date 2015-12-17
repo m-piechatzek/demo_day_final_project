@@ -25,7 +25,6 @@ class UsersController < ApplicationController
   end
 
    def update
-    #  puts params[:user][:long]
      @user = current_user
      @ticketters_lat = TicketterLocation.select("tick_lat");
      @ticketters_lng = TicketterLocation.select("tick_lng");

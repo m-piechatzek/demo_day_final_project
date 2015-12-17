@@ -10,21 +10,19 @@
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQscgJMUX5SPRMKa6eA1hFdoPSBnc33ig&libraries=geometry&callback=initMap">
   </script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-<script src="dist/sweetalert.min.js"></script>
-<link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
 </head>
 <body>
   <% if user_signed_in? %>
-        Hello <%= current_user.username %>,
     <nav class="navbar navbar-default navbar-fixed-bottom">
       <div class="container">
 <div class="col-xs-12">
           <ul class="nav navbar-nav">
-        <li><a href="#">Profile</a></li>
-        <li><a href="#">Messages</a></li>
-        <li><a href="#">Contact Us</a></li>
-          <li><%= link_to "Logout", sessions_path, method: :delete,
-             data: {confirm: "are you sure you want to log out?"}%></li>
+        <li><a href="#"><i class="fa fa-user fa-2x"></i></a></li>
+        <li><a href="#"><i class="fa fa-comment fa-2x"></i></a></li>
+        <li><a href="#"><i class="fa fa-envelope-o fa-2x"></i></a></li>
+          <li><%= link_to(content_tag(:i, nil, class: "fa fa-sign-out fa-2x"),  sessions_path, method: :delete,
+             data: {confirm: "are you sure you want to log out?"})%></li>
+             <li><%= current_user.username %></li>
       </ul>
     </div>
     </div>
@@ -39,3 +37,4 @@
 </div>
 </body>
 </html>
+<!-- <i class="fa fa-users fa-2x"></i> -->

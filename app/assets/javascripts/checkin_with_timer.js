@@ -76,7 +76,7 @@ function initCheckInWithTimerMap() {
 
               //messages back if there has been any ticketters
                 alert("you have a ticketter in your area");
-                console.log("alert")
+                
                 //mark of the current checkin, don't really need this
               var marker2 = new google.maps.Marker({
                 map: map,

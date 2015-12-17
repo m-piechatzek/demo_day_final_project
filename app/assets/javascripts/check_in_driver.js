@@ -32,15 +32,13 @@ function initCheckInMap() {
             data:  {checkinlocation: {"check_lat": position.coords.latitude, "check_lng": position.coords.longitude, "user_id": user_id}},
             dataType: 'json'
           }).done(function(response) {
-
-              alert("You have checked in!");
-swal("Good job!", "You clicked the button!", "success");
-            if (response.status == "SUCCESS"){
-            distance(response.user_lat, response.user_lng, response.tick_lat, response.tick_lng);
-          } else {
-            alert("Cannot check in more than once!");
-          }
-        });
+              swal("Check-in Successful", "", "success");
+                if (response.status == "SUCCESS"){
+                    distance(response.user_lat, response.user_lng, response.tick_lat, response.tick_lng);
+              } else {
+                    swal("Cancelled", "You cannot check out more than once", "error");
+              }
+            });
         });
        });
 
@@ -67,7 +65,7 @@ swal("Good job!", "You clicked the button!", "success");
             if (distance<= 350){
 
               //messages back if there has been any ticketters
-                alert("you have a ticketter in your area");
+              // swal("Ticketter Alert", "There is a ticketter in your area", "warning");
                 //mark of the current checkin, don't really need this
               var marker2 = new google.maps.Marker({
                 map: map,

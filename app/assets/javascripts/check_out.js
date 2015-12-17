@@ -9,8 +9,12 @@ function initCheckOutMap() {
             method: "DELETE",
             dataType: 'json'
           }).done(function(response) {
-            if(response.status == "FAIL")
-            alert("cannot check out more than once")
+
+            if(response.status == "FAIL"){
+             swal("Cancelled", "You cannot check out more than once", "error");
+          }else {
+            swal("You checked out!","Check back in for users to find you", "success")
+          }
             });
         });
        };

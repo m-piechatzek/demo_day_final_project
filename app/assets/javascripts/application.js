@@ -23,3 +23,19 @@ function initMap() {
   initCheckOutMap();
   initRecentTickMap();
 }
+
+
+//   $('#btn_location_signout').toggle();
+//
+//
+// // hide login and show logout
+// $(document).on('click', '#btn_location', function () {
+//   $('#btn_location_signout').addClass('ui-btn-right').toggle();
+//   $(this).removeClass('ui-btn-right').toggle();
+// });
+//
+// // hide logout and show login
+// $(document).on('click', '#btn_location_signout', function () {
+//   $('#btn_location').addClass('ui-btn-right').toggle();
+//   $(this).removeClass('ui-btn-right').toggle();
+// });

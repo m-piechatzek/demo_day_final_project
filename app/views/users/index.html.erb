@@ -48,9 +48,14 @@
   #btn_location, #btn_location_signout, #btn_location_with_timer {
     padding: 2px;
     margin: 3px;
+        box-shadow: 1px 1px 3px black;
   }
-  #btn_location_with_timer {
+  #check_timer {
+    float: left;
     margin-bottom: 1px;
+  }
+  .timer_to{
+    /*float: left;*/
   }
   select {
     margin-top: 5px;
@@ -62,7 +67,8 @@
     position: relative;
     left: 21%;
     margin: 3px;
-    /*border-radius: 15px;*/
+    border-radius: 4px;
+    box-shadow: 1px 1px 3px black;
   }
   .map_van1 {
     width: 75px;
@@ -70,7 +76,8 @@
     position: relative;
     left: 21%;
     margin: 3px;
-    /*border-radius: 15px;*/
+    border-radius: 4px;
+    box-shadow: 1px 1px 3px black;
   }
   .fa-bullseye {
     position: relative;
@@ -84,25 +91,110 @@
     font-size: .5em;
     color: white;
   }
+  .checkin_explain {
+    position: absolute;
+    top: 250px;
+  }
   .top_word {
     margin: 0px;
   }
   #you, #vanppl {
     margin: 0px;
-    font-size: 1.8em;
+    font-size: 1.6em;
   }
   #hour, #min {
     width: 35px;
     margin-bottom: 3px;
   }
   #btn_location_signout {
-    float: right;
-    position: absolute;
+    /*float: right;*/
+    /*position: absolute;
     top: 125px;
-    padding: 0px;
+    padding: 0px;*/
+    margin-right: 6px;
+        box-shadow: 1px 1px 3px black;
   }
   #time {
     color: white;
+  }
+  #check_timer {
+    position: absolute;
+    top: 87px;
+    left: 93px;
+    z-index: 1;
+    box-shadow: 1px 1px 3px black;
+
+  }
+  .move_timer {
+    position: absolute;
+    top: 157px;
+    left: 89px;
+  }
+  .forgot {
+    background-color: rgba(242, 242, 242, 0.8);
+    width: 100px;
+    float: left;
+    margin: 3px;
+    padding: 2px;
+    border-radius: 15px;
+  }
+  .recent {
+    background-color: rgba(242, 242, 242, 0.8);
+    width: 100px;
+    float: right;
+    margin: 3px;
+    padding: 2px;
+    border-radius: 15px;
+  }
+  .direct_message {
+    background-color: rgba(242, 242, 242, 0.8);
+    width: 100px;
+    float: right;
+    margin: 3px;
+    padding: 2px;
+    border-radius: 15px;
+  }
+  #row2 {
+    position: absolute;
+    top: 260px;
+    left: 7px;
+  }
+  .row{
+    margin-left: 1px;
+  }
+  #btn_ticketter {
+    margin: 2px;
+    padding: 24px 5px;
+        box-shadow: 1px 1px 3px black;
+  }
+  .line {
+    color: rgba(109, 109, 109, 0.4);
+    font-size: 2.0em;
+    position: absolute;
+    top: 200px;
+    left: 50px;
+  }
+  .checkin_block{
+    background-color: rgba(242, 242, 242, 0.8);
+    width: 157px;
+    height: 190px;
+    border-radius: 15px;
+        margin: 3px;
+        padding: 1px;
+  }
+  .tick_block {
+    background-color: rgba(242, 242, 242, 0.8);
+    width: 157px;
+    height: 190px;
+    border-radius: 15px;
+    margin: 3px;
+    padding-left: 8px;
+    position: absolute;
+    top: 0px;
+    right: 15px;
+  }
+  #min, #hour {
+        box-shadow: 1px 1px 3px black;
   }
 
 </style>
@@ -143,69 +235,86 @@
 
 <!-- If current user signed in -->
 <% if current_user.present? %>
+<div class="row">
+
   <div class="col-xs-6 checkins ">
     <!-- Title -->
-    <h4 class="top_word">For</h4>
-      <h3 id="you">You</h3>
+    <!-- <h4 class="top_word">For</h4>
+      <h3 id="you">You</h3> -->
+<div class="checkin_block">
+
       <!-- Map Image -->
         <img src="map_van.png" alt="" class="map_van1" />
           <i class="fa fa-map-marker fa-3x"></i>
           <!--  -->
     <button type="button" name="button" id="btn_location">Check-In</button>
-      <button type="button" name="button" id="btn_location_signout">Check-Out</button>
-    <p class="checkin_explain">
+  <input type="button" id= "check_timer" value="Check-In&#x00A;+&#x00A;Timer">
+<div class="move_timer">
+
+ <input id="hour" name="hour" ><span id="time"> : </span><input id="min" name="min">
+</div>
+    <!-- <p class="checkin_explain">
       Click to save location of your parked vehicle so that other
       users can notify you of ticketters
-    </p>
+    </p> -->
 <!-- current user checkin with timer -->
-  <span id="time">Timer:</span> <input id="hour" name="hour" ><span id="time"> : </span><input id="min" name="min"><br>
-  <input type="button" id= "check_timer" value="Check-In + Timer">
 
-    <h4>Forgot to Check-in?</h4>
-    <button type="button" name="button" id="btn_forgot_checkin">Check-In</button>
+      <button type="button" name="button" id="btn_location_signout">CheckOut</button>
+</div>
+</div>
 
+    <div class="col-xs-6 pull-right">
   <!-- Finds current user_id -->
     <input type="hidden" id="current_user" value="<%= current_user.id %>" />
 
-  </div>
-  <div class="col-xs-6 pull-right">
-    <h4 class="top_word">Other</h4>
-    <h3 id="vanppl">Vancouverites</h3>
+
+    <!-- <h4 class="top_word">Other</h4>
+    <h3 id="vanppl">Vancouverites</h3> -->
+    <div class="tick_block">
+
         <img src="map_van.png" alt="" class="map_van" />
         <i class="fa fa-bullseye fa-3x"></i>
         <button type="button" name="button" id="btn_ticketter">Ticketter Location</button>
-        <p class="ticket_explain">
+      </div>
+        <!-- <p class="ticket_explain">
           Send in your location so that other users know that a ticketter is near
-        </p>
-        <h4>Direct Message a User by License Plate</h4>
-        <button type="button" name="button" id="btn_notify_towed">Towed</button>
-        <button type="button" name="button" id="btn_notify_ticket">Ticketted</button>
-        <button type="button" name="button" id="btn_notify_custom">Custom</button>
+        </p> -->
+</div>
+</div>
+
+<p class="line">
+  off with a warning
+</p>
+
+  <div class="row" id="row2">
+
+    <div class="col-xs-12">
+      <div class="forgot text-center">
+        <h4>Forgot to Check-in? </h4><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <i class="fa fa-map-marker fa-4x"></i>
+        <button type="button" name="button" id="btn_forgot_checkin">Check-In</button>
+      </div>
+
+      <div class="direct_message text-center">
+      <h4>IM a User by License Plate</h4>
+      <i class="fa fa-comment fa-4x"></i>
+      <!-- <button type="button" name="button" id="btn_notify_towed">Towed</button>
+      <button type="button" name="button" id="btn_notify_ticket">Ticketted</button> -->
+      <button type="button" name="button" id="btn_notify_custom">Custom</button>
+    </div>
+
+      <div class="recent text-center">
       <h4>Map of Recent Ticketters</h4>
-        <button type="button" name="button" id="btn_recent_ticketters">Map</button>
+      <i class="fa fa-map fa-4x"></i>
+      <button type="button" name="button" id="btn_recent_ticketters">Map</button>
+    </div>
+
+    </div>
   </div>
 
 
 
-  <!-- Modal -->
-    <!-- <div class="modal fade" id="myModal" role="dialog">
-      <div class="modal-dialog"> -->
-
-        <!-- Modal content-->
-        <!-- <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title">Modal Methods</h4>
-          </div>
-          <div class="modal-body">
-            <p>The <strong>show</strong> method shows the modal and the <strong>hide</strong> method hides the modal.</p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div> -->
 <% end %>
-
 
 
 
@@ -228,3 +337,27 @@
   <!-- FONT AWESOME FOR SPINNER -->
     <div id="map"></div>
 </body>
+
+<script>
+// $('i').mouseover(function() {
+//   $(this).stop().animate({height : "100px"})
+// });
+
+
+$('#btn_location_signout').toggle();
+
+
+// hide login and show logout
+$(document).on('click', '#btn_location', function () {
+  $('#btn_location_signout').addClass('ui-btn-right').toggle();
+  $(this).removeClass('ui-btn-right').toggle();
+});
+
+// hide logout and show login
+$(document).on('click', '#btn_location_signout', function () {
+  $('#btn_location').addClass('ui-btn-right').toggle();
+  $(this).removeClass('ui-btn-right').toggle();
+});
+
+
+</script>
