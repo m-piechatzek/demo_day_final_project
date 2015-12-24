@@ -14,30 +14,37 @@
   }
 
   p {
+
     white-space: normal;
   }
 
   #sign_up {
-    width: 100px;
-    position: relative;
-    left: 36%;
+    /*width: 100px;*/
+    /*padding-right: 4px;*/
+    /*position: relative;
+    left: 36%;*/
+    /*float: right;*/
   }
 
   .title {
-    color: #536b87;
-    font-size: 4.3em;
-    /*text-shadow: 1px 1px white, -1px -1px #444;*/
-    margin: 0px;
-    margin-right: 20px;
-    padding: 0px;
-    text-shadow:1px 1px white,
+    color: rgba(109, 109, 109, 0.4);
+    font-size: 2em;
+    text-shadow: 1px 1px white, -1px -1px #444;
+    /*margin: 0px;
+    margin-right: 20px;*/
+
+    position: absolute;
+    top: 230px;
+
+
+    /*text-shadow:1px 1px white,
              0 6px 1px rgba(0,0,0,.1),
              0 0 5px rgba(0,0,0,.1),
              0 1px 3px rgba(0,0,0,.3),
              0 3px 5px rgba(0,0,0,.2),
              0 5px 10px rgba(0,0,0,.25),
              0 10px 10px rgba(0,0,0,.2),
-             0 20px 20px rgba(0,0,0,.15);
+             0 20px 20px rgba(0,0,0,.15);*/
   }
   h3,h4 {
     color: white;
@@ -157,7 +164,7 @@
   #row2 {
     position: absolute;
     top: 260px;
-    left: 7px;
+    left: 20px;
   }
   .row{
     margin-left: 1px;
@@ -191,20 +198,90 @@
     padding-left: 8px;
     position: absolute;
     top: 0px;
-    right: 15px;
+    right: 50px;
   }
   #min, #hour {
         box-shadow: 1px 1px 3px black;
   }
+  #slideshow {
+    margin: 5px auto;
+    position: relative;
+    width: 100%;
+    height: 240px;
+    padding: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.4);
+    background-color: rgba(242, 242, 242, 0.4);
+  border-radius: 15px;
+}
+
+#slideshow > div {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+
+}
+.img_size {
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+}
+.login_block {
+    background-color: rgba(242, 242, 242, 0.8);
+    width: 157px;
+    height: 200px;
+    border-radius: 15px;
+    padding: 5px;
+    position: absolute;
+    left: 10px;
+    top: 45px;
+}
+.tick_no_sign_block {
+  background-color: rgba(242, 242, 242, 0.8);
+  width: 157px;
+  height: 200px;
+  border-radius: 15px;
+  padding: 5px;
+  position: relative;
+  bottom: 4px;
+
+}
+#btn_ticketter_no_signup {
+  padding: 7px 12px;
+}
 
 </style>
 <body class="body">
 <!-- Login if user is not signed in -->
       <% if !current_user.present? %>
+      <div class="row">
+        <div class="col-xs-12">
+          <div id="slideshow">
+             <div>
+               <img src="tick_1.jpg" class="img_size">
+             </div>
+             <div>
+               <img src="tick_2.jpg" class="img_size">
+             </div>
+             <div>
+               <img src="tick_3.jpg" class="img_size"/>
+             </div>
+             <div>
+               <img src="tick_4.jpg" class="img_size">
+             </div>
+             <div>
+               <img src="tick_5.jpg" class="img_size">
+             </div>
+          </div>
+          <h1 class="title text-center">Off with a Warning</h1>
+        </div>
+      </div>
 <div class="row">
     <div class="col-xs-6">
-      <h1 class="title text-center">Off with a Warning</h1>
-        <h3 class="text-center">Login</h3>
+      <div class="login_block">
+
+        <i class="fa fa-sign-in fa-4x"></i>
           <%= form_tag sessions_path do %>
             <div class="form-inline">
               <div class="form-group">
@@ -215,19 +292,27 @@
               </div>
                   <%= submit_tag "Log In", class: "btn btn-default" %>
               </div>
+            </div>
       <% end %>
     </div>
 
   <div class="col-xs-6 text-center tick_no">
     <!-- Sign up if not signed in -->
-    <button type="button" name="button" id="btn_ticketter_no_signup" class="btn btn-default"><p>Post Ticketter Location without Sign Up</p></button>
+    <div class="tick_no_sign_block">
+
+
+    <button type="button" name="button" id="btn_ticketter_no_signup" class="btn btn-default"><i class="fa fa-map fa-4x"></i><br>Post <br>Ticketter <br>Location</button>
+<div class=" btn btn-lg btn-default"id="sign_up">
+
+  <%= link_to "Sign Up", new_user_path %>
+</div>
+</div>
   </div>
 </div>
 
 <div class="row">
-  <div class="col-xs-12 btn btn-lg btn-default" id="sign_up">
-      <%= link_to "Sign Up", new_user_path %>
-  </div>
+  <!-- <div class="col-xs-12 btn btn-lg btn-default" id="sign_up">
+  </div> -->
     <% end %>
 </div>
 
@@ -259,7 +344,7 @@
     </p> -->
 <!-- current user checkin with timer -->
 
-      <button type="button" name="button" id="btn_location_signout">CheckOut</button>
+      <button type="button" name="button" id="btn_location_signout">Check<br>Out</button>
 </div>
 </div>
 
@@ -358,6 +443,17 @@ $(document).on('click', '#btn_location_signout', function () {
   $('#btn_location').addClass('ui-btn-right').toggle();
   $(this).removeClass('ui-btn-right').toggle();
 });
+
+$("#slideshow > div:gt(0)").hide();
+
+setInterval(function() {
+  $('#slideshow > div:first')
+    .fadeOut(1000)
+    .next()
+    .fadeIn(1000)
+    .end()
+    .appendTo('#slideshow');
+},  3000);
 
 
 </script>
